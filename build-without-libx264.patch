@@ -1,0 +1,49 @@
+Only in obs-studio-23.1.0-BUILD/: build
+diff -urb obs-studio-23.1.0/plugins/CMakeLists.txt obs-studio-23.1.0-BUILD/plugins/CMakeLists.txt
+--- obs-studio-23.1.0/plugins/CMakeLists.txt	2019-04-05 07:36:13.000000000 -0700
++++ obs-studio-23.1.0-BUILD/plugins/CMakeLists.txt	2019-05-28 14:16:01.187415043 -0700
+@@ -70,7 +70,6 @@
+ endif()
+ 
+ add_subdirectory(image-source)
+-add_subdirectory(obs-x264)
+ add_subdirectory(obs-libfdk)
+ add_subdirectory(obs-ffmpeg)
+ add_subdirectory(obs-outputs)
+diff -urb obs-studio-23.1.0/plugins/obs-x264/CMakeLists.txt obs-studio-23.1.0-BUILD/plugins/obs-x264/CMakeLists.txt
+--- obs-studio-23.1.0/plugins/obs-x264/CMakeLists.txt	2019-04-05 07:36:13.000000000 -0700
++++ obs-studio-23.1.0-BUILD/plugins/obs-x264/CMakeLists.txt	2019-05-28 14:15:06.947415560 -0700
+@@ -1,6 +1,6 @@
+ project(obs-x264)
+ 
+-find_package(Libx264 REQUIRED)
++find_package(Libx264)
+ include_directories(${LIBX264_INCLUDE_DIRS})
+ add_definitions(${LIBX264_DEFINITIONS})
+ 
+diff -urb obs-studio-23.1.0/UI/window-basic-auto-config-test.cpp obs-studio-23.1.0-BUILD/UI/window-basic-auto-config-test.cpp
+--- obs-studio-23.1.0/UI/window-basic-auto-config-test.cpp	2019-04-05 07:36:13.000000000 -0700
++++ obs-studio-23.1.0-BUILD/UI/window-basic-auto-config-test.cpp	2019-05-28 15:12:14.925382869 -0700
+@@ -185,8 +185,8 @@
+ 		? "rtmp_custom"
+ 		: "rtmp_common";
+ 
+-	OBSEncoder vencoder = obs_video_encoder_create("obs_x264",
+-			"test_x264", nullptr, nullptr);
++	OBSEncoder vencoder = obs_video_encoder_create("obs_ffmpeg",
++			"test_ffmpeg", nullptr, nullptr);
+ 	OBSEncoder aencoder = obs_audio_encoder_create("ffmpeg_aac",
+ 			"test_aac", nullptr, 0, nullptr);
+ 	OBSService service = obs_service_create(serverType,
+diff -urb obs-studio-23.1.0/UI/window-basic-main.cpp obs-studio-23.1.0-BUILD/UI/window-basic-main.cpp
+--- obs-studio-23.1.0/UI/window-basic-main.cpp	2019-04-05 07:36:13.000000000 -0700
++++ obs-studio-23.1.0-BUILD/UI/window-basic-main.cpp	2019-05-28 15:17:32.158379843 -0700
+@@ -1223,7 +1223,7 @@
+ 			true);
+ 	config_set_default_bool  (basicConfig, "AdvOut", "UseRescale", false);
+ 	config_set_default_uint  (basicConfig, "AdvOut", "TrackIndex", 1);
+-	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs_x264");
++	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs-ffmpeg");
+ 
+ 	config_set_default_string(basicConfig, "AdvOut", "RecType", "Standard");
+ 

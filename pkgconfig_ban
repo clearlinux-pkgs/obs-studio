@@ -1,0 +1,12 @@
+# This file contains pkgconfig build requirements that get picked up
+# but are undesirable. One entry per line, no whitespace.
+libobs
+obs
+x264
+curl
+fdk-aac
+iconv
+jack
+libspeexdsp
+mbedtls
+v4l-utils
