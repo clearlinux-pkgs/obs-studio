@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 23.1.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/obsproject/obs-studio/archive/23.1.0.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/23.1.0.tar.gz
 Summary  : OBS Studio Library
@@ -35,6 +35,7 @@ BuildRequires : pkgconfig(freetype2)
 BuildRequires : pkgconfig(jansson)
 BuildRequires : pkgconfig(libcurl)
 BuildRequires : pkgconfig(libvlc)
+BuildRequires : pkgconfig(luajit)
 BuildRequires : pkgconfig(speexdsp)
 BuildRequires : pkgconfig(udev)
 BuildRequires : pkgconfig(x11-xcb)
@@ -44,9 +45,11 @@ BuildRequires : qtsvg-dev
 BuildRequires : qtx11extras-dev
 BuildRequires : swig
 BuildRequires : texlive
+BuildRequires : util-linux
 BuildRequires : v4l-utils-dev
 BuildRequires : zlib-dev
 Patch1: build-without-libx264.patch
+Patch2: 0001-obs-studio-change-default-config-to-ffmpeg.patch
 
 %description
 Linux XShm capture plugin
@@ -113,13 +116,14 @@ plugins components for the obs-studio package.
 %prep
 %setup -q -n obs-studio-23.1.0
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569263860
+export SOURCE_DATE_EPOCH=1572025998
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -135,18 +139,18 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1569263860
+export SOURCE_DATE_EPOCH=1572025998
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
-cp COPYING %{buildroot}/usr/share/package-licenses/obs-studio/COPYING
-cp UI/data/license/gplv2.txt %{buildroot}/usr/share/package-licenses/obs-studio/UI_data_license_gplv2.txt
-cp deps/jansson/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/deps_jansson_LICENSE
-cp deps/json11/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/deps_json11_LICENSE.txt
-cp deps/libcaption/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/deps_libcaption_LICENSE.txt
-cp deps/w32-pthreads/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/deps_w32-pthreads_COPYING
-cp deps/w32-pthreads/COPYING.LIB %{buildroot}/usr/share/package-licenses/obs-studio/deps_w32-pthreads_COPYING.LIB
-cp plugins/mac-syphon/data/syphon_license.txt %{buildroot}/usr/share/package-licenses/obs-studio/plugins_mac-syphon_data_syphon_license.txt
-cp plugins/obs-outputs/librtmp/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/plugins_obs-outputs_librtmp_COPYING
+cp %{_builddir}/obs-studio-23.1.0/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/bc6f9cc8e2dfb6c1c772872d758805ad3e749954
+cp %{_builddir}/obs-studio-23.1.0/UI/data/license/gplv2.txt %{buildroot}/usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed
+cp %{_builddir}/obs-studio-23.1.0/deps/jansson/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/26a708b97cbb50e3fce8078dd21d65c8fdd5a605
+cp %{_builddir}/obs-studio-23.1.0/deps/json11/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c
+cp %{_builddir}/obs-studio-23.1.0/deps/libcaption/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/ac86b1d99268507a73261982375a5f47541247b1
+cp %{_builddir}/obs-studio-23.1.0/deps/w32-pthreads/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/0aeece1a03fbe9860ded71b2e17445209ad33c77
+cp %{_builddir}/obs-studio-23.1.0/deps/w32-pthreads/COPYING.LIB %{buildroot}/usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0
+cp %{_builddir}/obs-studio-23.1.0/plugins/mac-syphon/data/syphon_license.txt %{buildroot}/usr/share/package-licenses/obs-studio/6f68b53b3b12e5b75f296c54be785bc63e553d53
+cp %{_builddir}/obs-studio-23.1.0/plugins/obs-outputs/librtmp/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/6138ce06f16aef800693fb256090749acbabd038
 pushd clr-build
 %make_install
 popd
@@ -1111,18 +1115,19 @@ popd
 /usr/lib/obs-plugins/text-freetype2.so
 /usr/lib/obs-plugins/vlc-video.so
 /usr/lib/obs-scripting/_obspython.so
+/usr/lib/obs-scripting/obslua.so
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/obs-studio/COPYING
-/usr/share/package-licenses/obs-studio/UI_data_license_gplv2.txt
-/usr/share/package-licenses/obs-studio/deps_jansson_LICENSE
-/usr/share/package-licenses/obs-studio/deps_json11_LICENSE.txt
-/usr/share/package-licenses/obs-studio/deps_libcaption_LICENSE.txt
-/usr/share/package-licenses/obs-studio/deps_w32-pthreads_COPYING
-/usr/share/package-licenses/obs-studio/deps_w32-pthreads_COPYING.LIB
-/usr/share/package-licenses/obs-studio/plugins_mac-syphon_data_syphon_license.txt
-/usr/share/package-licenses/obs-studio/plugins_obs-outputs_librtmp_COPYING
+/usr/share/package-licenses/obs-studio/0aeece1a03fbe9860ded71b2e17445209ad33c77
+/usr/share/package-licenses/obs-studio/26a708b97cbb50e3fce8078dd21d65c8fdd5a605
+/usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed
+/usr/share/package-licenses/obs-studio/6138ce06f16aef800693fb256090749acbabd038
+/usr/share/package-licenses/obs-studio/6f68b53b3b12e5b75f296c54be785bc63e553d53
+/usr/share/package-licenses/obs-studio/ac86b1d99268507a73261982375a5f47541247b1
+/usr/share/package-licenses/obs-studio/bc6f9cc8e2dfb6c1c772872d758805ad3e749954
+/usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c
+/usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0
 
 %files plugins
 %defattr(-,root,root,-)

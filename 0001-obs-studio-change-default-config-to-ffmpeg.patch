@@ -1,0 +1,44 @@
+From 5dc1492e284a14e49f4e8c7956a8b3d6677d7e43 Mon Sep 17 00:00:00 2001
+From: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
+Date: Fri, 25 Oct 2019 10:42:34 -0700
+Subject: [PATCH] obs-studio: change default config to ffmpeg
+
+Change default config to ffmpeg advanced with webm as default format.
+---
+ UI/window-basic-main.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/UI/window-basic-main.cpp b/UI/window-basic-main.cpp
+index 0252425..0e063f7 100644
+--- a/UI/window-basic-main.cpp
++++ b/UI/window-basic-main.cpp
+@@ -1194,7 +1194,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+ 
+ 	/* ----------------------------------------------------- */
+ 
+-	config_set_default_string(basicConfig, "Output", "Mode", "Simple");
++	config_set_default_string(basicConfig, "Output", "Mode", "Advanced");
+ 
+ 	config_set_default_string(basicConfig, "SimpleOutput", "FilePath",
+ 			GetDefaultVideoSavePath().c_str());
+@@ -1225,7 +1225,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+ 	config_set_default_uint  (basicConfig, "AdvOut", "TrackIndex", 1);
+ 	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs-ffmpeg");
+ 
+-	config_set_default_string(basicConfig, "AdvOut", "RecType", "Standard");
++	config_set_default_string(basicConfig, "AdvOut", "RecType", "FFmpeg");
+ 
+ 	config_set_default_string(basicConfig, "AdvOut", "RecFilePath",
+ 			GetDefaultVideoSavePath().c_str());
+@@ -1240,7 +1240,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+ 			true);
+ 	config_set_default_string(basicConfig, "AdvOut", "FFFilePath",
+ 			GetDefaultVideoSavePath().c_str());
+-	config_set_default_string(basicConfig, "AdvOut", "FFExtension", "mp4");
++	config_set_default_string(basicConfig, "AdvOut", "FFExtension", "webm");
+ 	config_set_default_uint  (basicConfig, "AdvOut", "FFVBitrate", 2500);
+ 	config_set_default_uint  (basicConfig, "AdvOut", "FFVGOPSize", 250);
+ 	config_set_default_bool  (basicConfig, "AdvOut", "FFUseRescale",
+-- 
+2.23.0
+
