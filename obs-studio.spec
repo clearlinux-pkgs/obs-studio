@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 23.1.0
-Release  : 2
+Release  : 3
 URL      : https://github.com/obsproject/obs-studio/archive/23.1.0.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/23.1.0.tar.gz
 Summary  : OBS Studio Library
@@ -49,7 +49,7 @@ BuildRequires : util-linux
 BuildRequires : v4l-utils-dev
 BuildRequires : zlib-dev
 Patch1: build-without-libx264.patch
-Patch2: 0001-obs-studio-change-default-config-to-ffmpeg.patch
+Patch2: obs-studio-change-default-config-to-ffmpeg.patch
 
 %description
 Linux XShm capture plugin
@@ -115,6 +115,7 @@ plugins components for the obs-studio package.
 
 %prep
 %setup -q -n obs-studio-23.1.0
+cd %{_builddir}/obs-studio-23.1.0
 %patch1 -p1
 %patch2 -p1
 
@@ -123,7 +124,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572025998
+export SOURCE_DATE_EPOCH=1572989367
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -139,7 +140,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1572025998
+export SOURCE_DATE_EPOCH=1572989367
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/obs-studio-23.1.0/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/bc6f9cc8e2dfb6c1c772872d758805ad3e749954

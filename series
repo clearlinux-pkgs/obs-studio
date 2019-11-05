@@ -1,2 +1,2 @@
 build-without-libx264.patch
-0001-obs-studio-change-default-config-to-ffmpeg.patch
+obs-studio-change-default-config-to-ffmpeg.patch

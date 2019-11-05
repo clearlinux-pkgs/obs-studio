@@ -1,8 +1,22 @@
-Only in obs-studio-23.1.0-BUILD/: build
-diff -urb obs-studio-23.1.0/plugins/CMakeLists.txt obs-studio-23.1.0-BUILD/plugins/CMakeLists.txt
---- obs-studio-23.1.0/plugins/CMakeLists.txt	2019-04-05 07:36:13.000000000 -0700
-+++ obs-studio-23.1.0-BUILD/plugins/CMakeLists.txt	2019-05-28 14:16:01.187415043 -0700
-@@ -70,7 +70,6 @@
+From adb74662586ae32e41e3b5dbba8c04a0f257ac96 Mon Sep 17 00:00:00 2001
+From: Auke Kok <auke-jan.h.kok@intel.com>
+Date: Tue, 5 Nov 2019 12:55:38 -0800
+Subject: [PATCH 1/2] build without libx264
+
+v2: undo 2 changes in original patch that make changes to UI with no
+effect on behavior
+
+Signed-off-by: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
+---
+ plugins/CMakeLists.txt          | 1 -
+ plugins/obs-x264/CMakeLists.txt | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/plugins/CMakeLists.txt b/plugins/CMakeLists.txt
+index 537ed21..f24a771 100644
+--- a/plugins/CMakeLists.txt
++++ b/plugins/CMakeLists.txt
+@@ -70,7 +70,6 @@ if(WIN32 OR APPLE)
  endif()
  
  add_subdirectory(image-source)
@@ -10,9 +24,10 @@ diff -urb obs-studio-23.1.0/plugins/CMakeLists.txt obs-studio-23.1.0-BUILD/plugi
  add_subdirectory(obs-libfdk)
  add_subdirectory(obs-ffmpeg)
  add_subdirectory(obs-outputs)
-diff -urb obs-studio-23.1.0/plugins/obs-x264/CMakeLists.txt obs-studio-23.1.0-BUILD/plugins/obs-x264/CMakeLists.txt
---- obs-studio-23.1.0/plugins/obs-x264/CMakeLists.txt	2019-04-05 07:36:13.000000000 -0700
-+++ obs-studio-23.1.0-BUILD/plugins/obs-x264/CMakeLists.txt	2019-05-28 14:15:06.947415560 -0700
+diff --git a/plugins/obs-x264/CMakeLists.txt b/plugins/obs-x264/CMakeLists.txt
+index 7d4ea8b..5ef4249 100644
+--- a/plugins/obs-x264/CMakeLists.txt
++++ b/plugins/obs-x264/CMakeLists.txt
 @@ -1,6 +1,6 @@
  project(obs-x264)
  
@@ -21,29 +36,6 @@ diff -urb obs-studio-23.1.0/plugins/obs-x264/CMakeLists.txt obs-studio-23.1.0-BU
  include_directories(${LIBX264_INCLUDE_DIRS})
  add_definitions(${LIBX264_DEFINITIONS})
  
-diff -urb obs-studio-23.1.0/UI/window-basic-auto-config-test.cpp obs-studio-23.1.0-BUILD/UI/window-basic-auto-config-test.cpp
---- obs-studio-23.1.0/UI/window-basic-auto-config-test.cpp	2019-04-05 07:36:13.000000000 -0700
-+++ obs-studio-23.1.0-BUILD/UI/window-basic-auto-config-test.cpp	2019-05-28 15:12:14.925382869 -0700
-@@ -185,8 +185,8 @@
- 		? "rtmp_custom"
- 		: "rtmp_common";
- 
--	OBSEncoder vencoder = obs_video_encoder_create("obs_x264",
--			"test_x264", nullptr, nullptr);
-+	OBSEncoder vencoder = obs_video_encoder_create("obs_ffmpeg",
-+			"test_ffmpeg", nullptr, nullptr);
- 	OBSEncoder aencoder = obs_audio_encoder_create("ffmpeg_aac",
- 			"test_aac", nullptr, 0, nullptr);
- 	OBSService service = obs_service_create(serverType,
-diff -urb obs-studio-23.1.0/UI/window-basic-main.cpp obs-studio-23.1.0-BUILD/UI/window-basic-main.cpp
---- obs-studio-23.1.0/UI/window-basic-main.cpp	2019-04-05 07:36:13.000000000 -0700
-+++ obs-studio-23.1.0-BUILD/UI/window-basic-main.cpp	2019-05-28 15:17:32.158379843 -0700
-@@ -1223,7 +1223,7 @@
- 			true);
- 	config_set_default_bool  (basicConfig, "AdvOut", "UseRescale", false);
- 	config_set_default_uint  (basicConfig, "AdvOut", "TrackIndex", 1);
--	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs_x264");
-+	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs-ffmpeg");
- 
- 	config_set_default_string(basicConfig, "AdvOut", "RecType", "Standard");
- 
+-- 
+2.23.0
+
