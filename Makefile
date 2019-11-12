@@ -1,5 +1,5 @@
 PKG_NAME := obs-studio
-URL = https://github.com/obsproject/obs-studio/archive/23.1.0.tar.gz
+URL = https://github.com/obsproject/obs-studio/archive/24.0.3.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

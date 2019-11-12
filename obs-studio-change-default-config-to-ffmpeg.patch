@@ -1,7 +1,7 @@
-From 7c1c5b54ca9c9fc00d72c6622e076e4acea497c1 Mon Sep 17 00:00:00 2001
+From 28513b22c0cd3cb5062145118faa16562e05a5f0 Mon Sep 17 00:00:00 2001
 From: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
-Date: Tue, 5 Nov 2019 13:17:22 -0800
-Subject: [PATCH 2/2] obs-studio: change default config to ffmpeg
+Date: Tue, 12 Nov 2019 11:11:43 -0800
+Subject: [PATCH] obs-studio: change default config to ffmpeg
 
 Change default config to ffmpeg advanced with webm as default format.
 
@@ -11,10 +11,10 @@ Signed-off-by: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/UI/window-basic-main.cpp b/UI/window-basic-main.cpp
-index 11d92cf..74f1cc5 100644
+index 94723f1..b288fca 100644
 --- a/UI/window-basic-main.cpp
 +++ b/UI/window-basic-main.cpp
-@@ -1194,7 +1194,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+@@ -1205,7 +1205,7 @@ bool OBSBasic::InitBasicConfigDefaults()
  
  	/* ----------------------------------------------------- */
  
@@ -22,25 +22,25 @@ index 11d92cf..74f1cc5 100644
 +	config_set_default_string(basicConfig, "Output", "Mode", "Advanced");
  
  	config_set_default_string(basicConfig, "SimpleOutput", "FilePath",
- 			GetDefaultVideoSavePath().c_str());
-@@ -1225,7 +1225,7 @@ bool OBSBasic::InitBasicConfigDefaults()
- 	config_set_default_uint  (basicConfig, "AdvOut", "TrackIndex", 1);
+ 				  GetDefaultVideoSavePath().c_str());
+@@ -1235,7 +1235,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+ 	config_set_default_uint(basicConfig, "AdvOut", "TrackIndex", 1);
  	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs_x264");
  
 -	config_set_default_string(basicConfig, "AdvOut", "RecType", "Standard");
 +	config_set_default_string(basicConfig, "AdvOut", "RecType", "FFmpeg");
  
  	config_set_default_string(basicConfig, "AdvOut", "RecFilePath",
- 			GetDefaultVideoSavePath().c_str());
-@@ -1240,7 +1240,7 @@ bool OBSBasic::InitBasicConfigDefaults()
- 			true);
+ 				  GetDefaultVideoSavePath().c_str());
+@@ -1247,7 +1247,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+ 	config_set_default_bool(basicConfig, "AdvOut", "FFOutputToFile", true);
  	config_set_default_string(basicConfig, "AdvOut", "FFFilePath",
- 			GetDefaultVideoSavePath().c_str());
+ 				  GetDefaultVideoSavePath().c_str());
 -	config_set_default_string(basicConfig, "AdvOut", "FFExtension", "mp4");
 +	config_set_default_string(basicConfig, "AdvOut", "FFExtension", "webm");
- 	config_set_default_uint  (basicConfig, "AdvOut", "FFVBitrate", 2500);
- 	config_set_default_uint  (basicConfig, "AdvOut", "FFVGOPSize", 250);
- 	config_set_default_bool  (basicConfig, "AdvOut", "FFUseRescale",
+ 	config_set_default_uint(basicConfig, "AdvOut", "FFVBitrate", 2500);
+ 	config_set_default_uint(basicConfig, "AdvOut", "FFVGOPSize", 250);
+ 	config_set_default_bool(basicConfig, "AdvOut", "FFUseRescale", false);
 -- 
-2.23.0
+2.24.0
 
