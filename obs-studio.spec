@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 24.0.3
-Release  : 4
+Release  : 5
 URL      : https://github.com/obsproject/obs-studio/archive/24.0.3.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/24.0.3.tar.gz
 Summary  : OBS Studio Library
@@ -14,7 +14,6 @@ Requires: obs-studio-bin = %{version}-%{release}
 Requires: obs-studio-data = %{version}-%{release}
 Requires: obs-studio-lib = %{version}-%{release}
 Requires: obs-studio-license = %{version}-%{release}
-Requires: obs-studio-plugins = %{version}-%{release}
 BuildRequires : alsa-lib-dev
 BuildRequires : buildreq-cmake
 BuildRequires : curl-dev
@@ -45,6 +44,7 @@ BuildRequires : qtsvg-dev
 BuildRequires : qtx11extras-dev
 BuildRequires : swig
 BuildRequires : texlive
+BuildRequires : util-linux
 BuildRequires : v4l-utils-dev
 BuildRequires : zlib-dev
 Patch1: build-without-libx264.patch
@@ -104,14 +104,6 @@ Group: Default
 license components for the obs-studio package.
 
 
-%package plugins
-Summary: plugins components for the obs-studio package.
-Group: Default
-
-%description plugins
-plugins components for the obs-studio package.
-
-
 %prep
 %setup -q -n obs-studio-24.0.3
 cd %{_builddir}/obs-studio-24.0.3
@@ -123,7 +115,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573587328
+export SOURCE_DATE_EPOCH=1574273003
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -134,12 +126,12 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%cmake ..
+%cmake .. -DOBS_MULTIARCH_SUFFIX=64
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1573587328
+export SOURCE_DATE_EPOCH=1574273003
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/obs-studio-24.0.3/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/bc6f9cc8e2dfb6c1c772872d758805ad3e749954
@@ -157,7 +149,7 @@ popd
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/obs-scripting/obspython.py
+/usr/lib64/obs-scripting/obspython.py
 
 %files bin
 %defattr(-,root,root,-)
@@ -1095,36 +1087,42 @@ popd
 /usr/include/obs/util/vc/vc_inttypes.h
 /usr/include/obs/util/vc/vc_stdbool.h
 /usr/include/obs/util/vc/vc_stdint.h
-/usr/lib/cmake/LibObs/LibObsConfig.cmake
-/usr/lib/cmake/LibObs/LibObsConfigVersion.cmake
-/usr/lib/cmake/LibObs/LibObsTarget-relwithdebinfo.cmake
-/usr/lib/cmake/LibObs/LibObsTarget.cmake
-/usr/lib/libobs-frontend-api.so
-/usr/lib/libobs-opengl.so
-/usr/lib/libobs-scripting.so
-/usr/lib/libobs.so
-/usr/lib/libobsglad.so
+/usr/lib64/cmake/LibObs/LibObsConfig.cmake
+/usr/lib64/cmake/LibObs/LibObsConfigVersion.cmake
+/usr/lib64/cmake/LibObs/LibObsTarget-relwithdebinfo.cmake
+/usr/lib64/cmake/LibObs/LibObsTarget.cmake
+/usr/lib64/libobs-frontend-api.so
+/usr/lib64/libobs-opengl.so
+/usr/lib64/libobs-scripting.so
+/usr/lib64/libobs.so
+/usr/lib64/libobsglad.so
 /usr/lib64/pkgconfig/libobs.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/obs-plugins/decklink-ouput-ui.so
-/usr/lib/obs-plugins/frontend-tools.so
-/usr/lib/obs-plugins/image-source.so
-/usr/lib/obs-plugins/linux-alsa.so
-/usr/lib/obs-plugins/linux-capture.so
-/usr/lib/obs-plugins/linux-decklink.so
-/usr/lib/obs-plugins/linux-pulseaudio.so
-/usr/lib/obs-plugins/linux-v4l2.so
-/usr/lib/obs-plugins/obs-ffmpeg.so
-/usr/lib/obs-plugins/obs-filters.so
-/usr/lib/obs-plugins/obs-outputs.so
-/usr/lib/obs-plugins/obs-transitions.so
-/usr/lib/obs-plugins/rtmp-services.so
-/usr/lib/obs-plugins/text-freetype2.so
-/usr/lib/obs-plugins/vlc-video.so
-/usr/lib/obs-scripting/_obspython.so
-/usr/lib/obs-scripting/obslua.so
+/usr/lib64/libobs-frontend-api.so.0
+/usr/lib64/libobs-frontend-api.so.0.0
+/usr/lib64/libobs-opengl.so.0
+/usr/lib64/libobs-opengl.so.0.0
+/usr/lib64/libobs.so.0
+/usr/lib64/libobsglad.so.0
+/usr/lib64/obs-plugins/decklink-ouput-ui.so
+/usr/lib64/obs-plugins/frontend-tools.so
+/usr/lib64/obs-plugins/image-source.so
+/usr/lib64/obs-plugins/linux-alsa.so
+/usr/lib64/obs-plugins/linux-capture.so
+/usr/lib64/obs-plugins/linux-decklink.so
+/usr/lib64/obs-plugins/linux-pulseaudio.so
+/usr/lib64/obs-plugins/linux-v4l2.so
+/usr/lib64/obs-plugins/obs-ffmpeg.so
+/usr/lib64/obs-plugins/obs-filters.so
+/usr/lib64/obs-plugins/obs-outputs.so
+/usr/lib64/obs-plugins/obs-transitions.so
+/usr/lib64/obs-plugins/rtmp-services.so
+/usr/lib64/obs-plugins/text-freetype2.so
+/usr/lib64/obs-plugins/vlc-video.so
+/usr/lib64/obs-scripting/_obspython.so
+/usr/lib64/obs-scripting/obslua.so
 
 %files license
 %defattr(0644,root,root,0755)
@@ -1137,12 +1135,3 @@ popd
 /usr/share/package-licenses/obs-studio/bc6f9cc8e2dfb6c1c772872d758805ad3e749954
 /usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c
 /usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0
-
-%files plugins
-%defattr(-,root,root,-)
-/usr/lib/libobs-frontend-api.so.0
-/usr/lib/libobs-frontend-api.so.0.0
-/usr/lib/libobs-opengl.so.0
-/usr/lib/libobs-opengl.so.0.0
-/usr/lib/libobs.so.0
-/usr/lib/libobsglad.so.0
