@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 24.0.3
-Release  : 8
+Release  : 9
 URL      : https://github.com/obsproject/obs-studio/archive/24.0.3.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/24.0.3.tar.gz
 Summary  : OBS Studio Library
