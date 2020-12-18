@@ -10,3 +10,4 @@ jack
 libspeexdsp
 mbedtls
 v4l-utils
+rnnoise
