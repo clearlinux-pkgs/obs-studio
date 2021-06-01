@@ -11,3 +11,5 @@ libspeexdsp
 mbedtls
 v4l-utils
 rnnoise
+detours
+libftl
