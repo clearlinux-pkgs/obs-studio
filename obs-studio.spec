@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 27.1.1
-Release  : 17
+Release  : 18
 URL      : https://github.com/obsproject/obs-studio/archive/27.1.1/obs-studio-27.1.1.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/27.1.1/obs-studio-27.1.1.tar.gz
 Summary  : OBS Studio Library
@@ -128,23 +128,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1632862049
+export SOURCE_DATE_EPOCH=1632862536
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
 %cmake .. -DOBS_MULTIARCH_SUFFIX=64 -DBUILD_BROWSER=OFF -DBUILD_VST=OFF
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1632862049
+export SOURCE_DATE_EPOCH=1632862536
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/obs-studio-27.1.1/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/bc6f9cc8e2dfb6c1c772872d758805ad3e749954
