@@ -6,10 +6,14 @@ libobs-frontend-api.so.0:obs_frontend_add_save_callback
 libobs-frontend-api.so.0:obs_frontend_add_scene_collection
 libobs-frontend-api.so.0:obs_frontend_add_tools_menu_item
 libobs-frontend-api.so.0:obs_frontend_add_tools_menu_qaction
+libobs-frontend-api.so.0:obs_frontend_create_profile
 libobs-frontend-api.so.0:obs_frontend_defer_save_begin
 libobs-frontend-api.so.0:obs_frontend_defer_save_end
+libobs-frontend-api.so.0:obs_frontend_delete_profile
+libobs-frontend-api.so.0:obs_frontend_duplicate_profile
 libobs-frontend-api.so.0:obs_frontend_get_current_preview_scene
 libobs-frontend-api.so.0:obs_frontend_get_current_profile
+libobs-frontend-api.so.0:obs_frontend_get_current_profile_path
 libobs-frontend-api.so.0:obs_frontend_get_current_scene
 libobs-frontend-api.so.0:obs_frontend_get_current_scene_collection
 libobs-frontend-api.so.0:obs_frontend_get_current_transition
@@ -31,6 +35,8 @@ libobs-frontend-api.so.0:obs_frontend_get_transition_duration
 libobs-frontend-api.so.0:obs_frontend_get_transitions
 libobs-frontend-api.so.0:obs_frontend_get_virtualcam_output
 libobs-frontend-api.so.0:obs_frontend_open_projector
+libobs-frontend-api.so.0:obs_frontend_open_source_filters
+libobs-frontend-api.so.0:obs_frontend_open_source_properties
 libobs-frontend-api.so.0:obs_frontend_pop_ui_translation
 libobs-frontend-api.so.0:obs_frontend_preview_enabled
 libobs-frontend-api.so.0:obs_frontend_preview_program_mode_active
@@ -1036,6 +1042,7 @@ libobs.so.0:obs_encoder_stop
 libobs.so.0:obs_encoder_update
 libobs.so.0:obs_encoder_video
 libobs.so.0:obs_enter_graphics
+libobs.so.0:obs_enum_all_sources
 libobs.so.0:obs_enum_audio_monitoring_devices
 libobs.so.0:obs_enum_encoder_types
 libobs.so.0:obs_enum_encoders
@@ -1330,6 +1337,10 @@ libobs.so.0:obs_properties_remove_by_name
 libobs.so.0:obs_properties_set_flags
 libobs.so.0:obs_properties_set_param
 libobs.so.0:obs_property_button_clicked
+libobs.so.0:obs_property_button_set_type
+libobs.so.0:obs_property_button_set_url
+libobs.so.0:obs_property_button_type
+libobs.so.0:obs_property_button_url
 libobs.so.0:obs_property_description
 libobs.so.0:obs_property_editable_list_default_path
 libobs.so.0:obs_property_editable_list_filter
@@ -1618,6 +1629,7 @@ libobs.so.0:obs_source_get_settings
 libobs.so.0:obs_source_get_signal_handler
 libobs.so.0:obs_source_get_speaker_layout
 libobs.so.0:obs_source_get_sync_offset
+libobs.so.0:obs_source_get_texcoords_centered
 libobs.so.0:obs_source_get_type
 libobs.so.0:obs_source_get_type_data
 libobs.so.0:obs_source_get_unversioned_id
@@ -1690,6 +1702,7 @@ libobs.so.0:obs_source_set_name
 libobs.so.0:obs_source_set_push_to_mute_delay
 libobs.so.0:obs_source_set_push_to_talk_delay
 libobs.so.0:obs_source_set_sync_offset
+libobs.so.0:obs_source_set_texcoords_centered
 libobs.so.0:obs_source_set_video_frame
 libobs.so.0:obs_source_set_video_frame2
 libobs.so.0:obs_source_set_volume
@@ -1866,6 +1879,9 @@ libobs.so.0:plane_transform3x4
 libobs.so.0:plane_tri_inside
 libobs.so.0:polar_to_cart
 libobs.so.0:polar_to_norm
+libobs.so.0:portal_inhibit
+libobs.so.0:portal_inhibit_info_create
+libobs.so.0:portal_inhibit_info_destroy
 libobs.so.0:proc_handler_add
 libobs.so.0:proc_handler_call
 libobs.so.0:proc_handler_create

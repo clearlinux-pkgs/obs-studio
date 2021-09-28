@@ -13,7 +13,6 @@ libavformat.so.58
 libavutil.so.56
 libc.so.6
 libcurl.so.4
-libdl.so.2
 libfontconfig.so.1
 libfreetype.so.6
 libgcc_s.so.1
@@ -22,7 +21,6 @@ libjansson.so.4
 libluajit-5.1.so.2
 libm.so.6
 libpipewire-0.3.so.0
-libpthread.so.0
 libpulse.so.0
 libpython3.9.so.1.0
 libspeexdsp.so.1
