@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 27.1.3
-Release  : 20
+Release  : 21
 URL      : https://github.com/obsproject/obs-studio/archive/27.1.3/obs-studio-27.1.3.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/27.1.3/obs-studio-27.1.3.tar.gz
 Summary  : OBS Studio Library
