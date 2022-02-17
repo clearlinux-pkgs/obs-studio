@@ -2,6 +2,7 @@ ld-linux-x86-64.so.2
 libEGL.so.1
 libQt5Core.so.5
 libQt5Gui.so.5
+libQt5Network.so.5
 libQt5Svg.so.5
 libQt5Widgets.so.5
 libQt5Xml.so.5
@@ -20,14 +21,17 @@ libgio-2.0.so.0
 libjansson.so.4
 libluajit-5.1.so.2
 libm.so.6
+libpci.so.3
 libpipewire-0.3.so.0
 libpulse.so.0
-libpython3.9.so.1.0
+libpython3.10.so.1.0
 libspeexdsp.so.1
 libstdc++.so.6
 libswresample.so.3
 libswscale.so.5
 libudev.so.1
 libv4l2.so.0
+libwayland-client.so.0
 libwayland-egl.so.1
+libxkbcommon.so.0
 libz.so.1

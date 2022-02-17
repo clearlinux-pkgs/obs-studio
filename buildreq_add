@@ -4,3 +4,5 @@ v4l-utils-dev
 curl-dev
 not-ffmpeg-dev
 pipewire-dev
+speex-dev
+speexdsp-dev

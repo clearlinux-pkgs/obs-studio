@@ -14,6 +14,7 @@ libobs-frontend-api.so.0:obs_frontend_duplicate_profile
 libobs-frontend-api.so.0:obs_frontend_get_current_preview_scene
 libobs-frontend-api.so.0:obs_frontend_get_current_profile
 libobs-frontend-api.so.0:obs_frontend_get_current_profile_path
+libobs-frontend-api.so.0:obs_frontend_get_current_record_output_path
 libobs-frontend-api.so.0:obs_frontend_get_current_scene
 libobs-frontend-api.so.0:obs_frontend_get_current_scene_collection
 libobs-frontend-api.so.0:obs_frontend_get_current_transition
@@ -36,6 +37,7 @@ libobs-frontend-api.so.0:obs_frontend_get_transitions
 libobs-frontend-api.so.0:obs_frontend_get_virtualcam_output
 libobs-frontend-api.so.0:obs_frontend_open_projector
 libobs-frontend-api.so.0:obs_frontend_open_source_filters
+libobs-frontend-api.so.0:obs_frontend_open_source_interaction
 libobs-frontend-api.so.0:obs_frontend_open_source_properties
 libobs-frontend-api.so.0:obs_frontend_pop_ui_translation
 libobs-frontend-api.so.0:obs_frontend_preview_enabled
@@ -81,6 +83,7 @@ libobs-opengl.so.0:device_begin_frame
 libobs-opengl.so.0:device_begin_scene
 libobs-opengl.so.0:device_blend_function
 libobs-opengl.so.0:device_blend_function_separate
+libobs-opengl.so.0:device_blend_op
 libobs-opengl.so.0:device_clear
 libobs-opengl.so.0:device_copy_texture
 libobs-opengl.so.0:device_copy_texture_region
@@ -132,6 +135,8 @@ libobs-opengl.so.0:device_preprocessor_name
 libobs-opengl.so.0:device_present
 libobs-opengl.so.0:device_projection_pop
 libobs-opengl.so.0:device_projection_push
+libobs-opengl.so.0:device_query_dmabuf_capabilities
+libobs-opengl.so.0:device_query_dmabuf_modifiers_for_format
 libobs-opengl.so.0:device_resize
 libobs-opengl.so.0:device_samplerstate_create
 libobs-opengl.so.0:device_set_cube_render_target
@@ -158,6 +163,8 @@ libobs-opengl.so.0:gl_copy_texture
 libobs-opengl.so.0:gl_create_buffer
 libobs-opengl.so.0:gl_egl_create_dmabuf_image
 libobs-opengl.so.0:gl_egl_error_to_string
+libobs-opengl.so.0:gl_egl_query_dmabuf_capabilities
+libobs-opengl.so.0:gl_egl_query_dmabuf_modifiers_for_format
 libobs-opengl.so.0:gl_getclientsize
 libobs-opengl.so.0:gl_init_face
 libobs-opengl.so.0:gl_platform_cleanup_swapchain
@@ -527,6 +534,7 @@ libobs.so.0:gs_begin_frame
 libobs.so.0:gs_begin_scene
 libobs.so.0:gs_blend_function
 libobs.so.0:gs_blend_function_separate
+libobs.so.0:gs_blend_op
 libobs.so.0:gs_blend_state_pop
 libobs.so.0:gs_blend_state_push
 libobs.so.0:gs_clear
@@ -668,6 +676,8 @@ libobs.so.0:gs_preprocessor_name
 libobs.so.0:gs_present
 libobs.so.0:gs_projection_pop
 libobs.so.0:gs_projection_push
+libobs.so.0:gs_query_dmabuf_capabilities
+libobs.so.0:gs_query_dmabuf_modifiers_for_format
 libobs.so.0:gs_render_save
 libobs.so.0:gs_render_start
 libobs.so.0:gs_render_stop
@@ -819,10 +829,12 @@ libobs.so.0:norm_to_polar
 libobs.so.0:obs_add_data_path
 libobs.so.0:obs_add_main_render_callback
 libobs.so.0:obs_add_module_path
+libobs.so.0:obs_add_raw_audio_callback
 libobs.so.0:obs_add_raw_video_callback
 libobs.so.0:obs_add_tick_callback
 libobs.so.0:obs_apply_private_data
 libobs.so.0:obs_audio_encoder_create
+libobs.so.0:obs_audio_monitoring_available
 libobs.so.0:obs_avc_find_startcode
 libobs.so.0:obs_avc_keyframe
 libobs.so.0:obs_context_data_free
@@ -830,6 +842,8 @@ libobs.so.0:obs_context_data_init
 libobs.so.0:obs_context_data_insert
 libobs.so.0:obs_context_data_remove
 libobs.so.0:obs_context_data_setname
+libobs.so.0:obs_context_init_control
+libobs.so.0:obs_context_wait
 libobs.so.0:obs_create_ui
 libobs.so.0:obs_data_addref
 libobs.so.0:obs_data_apply
@@ -1009,6 +1023,7 @@ libobs.so.0:obs_encoder_get_codec
 libobs.so.0:obs_encoder_get_defaults
 libobs.so.0:obs_encoder_get_display_name
 libobs.so.0:obs_encoder_get_extra_data
+libobs.so.0:obs_encoder_get_frame_size
 libobs.so.0:obs_encoder_get_height
 libobs.so.0:obs_encoder_get_id
 libobs.so.0:obs_encoder_get_last_error
@@ -1125,6 +1140,7 @@ libobs.so.0:obs_get_source_defaults
 libobs.so.0:obs_get_source_output_flags
 libobs.so.0:obs_get_source_properties
 libobs.so.0:obs_get_total_frames
+libobs.so.0:obs_get_transition_by_name
 libobs.so.0:obs_get_version
 libobs.so.0:obs_get_version_string
 libobs.so.0:obs_get_video
@@ -1188,6 +1204,7 @@ libobs.so.0:obs_hotkeys_save_source
 libobs.so.0:obs_hotkeys_set_audio_hotkeys_translations
 libobs.so.0:obs_hotkeys_set_sceneitem_hotkeys_translations
 libobs.so.0:obs_hotkeys_set_translations_s
+libobs.so.0:obs_in_task_thread
 libobs.so.0:obs_init_module
 libobs.so.0:obs_initialized
 libobs.so.0:obs_is_source_configurable
@@ -1231,6 +1248,9 @@ libobs.so.0:obs_obj_get_id
 libobs.so.0:obs_obj_get_type
 libobs.so.0:obs_obj_invalid
 libobs.so.0:obs_obj_is_private
+libobs.so.0:obs_object_get_ref
+libobs.so.0:obs_object_get_weak_object
+libobs.so.0:obs_object_release
 libobs.so.0:obs_open_module
 libobs.so.0:obs_output_active
 libobs.so.0:obs_output_actual_start
@@ -1420,6 +1440,7 @@ libobs.so.0:obs_register_service_s
 libobs.so.0:obs_register_source_s
 libobs.so.0:obs_remove_data_path
 libobs.so.0:obs_remove_main_render_callback
+libobs.so.0:obs_remove_raw_audio_callback
 libobs.so.0:obs_remove_raw_video_callback
 libobs.so.0:obs_remove_tick_callback
 libobs.so.0:obs_render_main_texture
@@ -1444,11 +1465,13 @@ libobs.so.0:obs_scene_find_source
 libobs.so.0:obs_scene_find_source_recursive
 libobs.so.0:obs_scene_from_source
 libobs.so.0:obs_scene_get_group
+libobs.so.0:obs_scene_get_ref
 libobs.so.0:obs_scene_get_source
 libobs.so.0:obs_scene_insert_group
 libobs.so.0:obs_scene_insert_group2
 libobs.so.0:obs_scene_is_group
 libobs.so.0:obs_scene_load_transform_states
+libobs.so.0:obs_scene_prune_sources
 libobs.so.0:obs_scene_release
 libobs.so.0:obs_scene_reorder_items
 libobs.so.0:obs_scene_reorder_items2
@@ -1462,6 +1485,7 @@ libobs.so.0:obs_sceneitem_defer_update_end
 libobs.so.0:obs_sceneitem_do_transition
 libobs.so.0:obs_sceneitem_force_update_transform
 libobs.so.0:obs_sceneitem_get_alignment
+libobs.so.0:obs_sceneitem_get_blending_mode
 libobs.so.0:obs_sceneitem_get_bounds
 libobs.so.0:obs_sceneitem_get_bounds_alignment
 libobs.so.0:obs_sceneitem_get_bounds_type
@@ -1498,6 +1522,7 @@ libobs.so.0:obs_sceneitem_save
 libobs.so.0:obs_sceneitem_select
 libobs.so.0:obs_sceneitem_selected
 libobs.so.0:obs_sceneitem_set_alignment
+libobs.so.0:obs_sceneitem_set_blending_mode
 libobs.so.0:obs_sceneitem_set_bounds
 libobs.so.0:obs_sceneitem_set_bounds_alignment
 libobs.so.0:obs_sceneitem_set_bounds_type
@@ -1762,10 +1787,16 @@ libobs.so.0:obs_volmeter_get_update_interval
 libobs.so.0:obs_volmeter_remove_callback
 libobs.so.0:obs_volmeter_set_peak_meter_type
 libobs.so.0:obs_volmeter_set_update_interval
+libobs.so.0:obs_wait_for_destroy_queue
 libobs.so.0:obs_weak_encoder_addref
 libobs.so.0:obs_weak_encoder_get_encoder
 libobs.so.0:obs_weak_encoder_references_encoder
 libobs.so.0:obs_weak_encoder_release
+libobs.so.0:obs_weak_object_addref
+libobs.so.0:obs_weak_object_expired
+libobs.so.0:obs_weak_object_get_object
+libobs.so.0:obs_weak_object_references_object
+libobs.so.0:obs_weak_object_release
 libobs.so.0:obs_weak_output_addref
 libobs.so.0:obs_weak_output_get_output
 libobs.so.0:obs_weak_output_references_output
@@ -1775,6 +1806,7 @@ libobs.so.0:obs_weak_service_get_service
 libobs.so.0:obs_weak_service_references_service
 libobs.so.0:obs_weak_service_release
 libobs.so.0:obs_weak_source_addref
+libobs.so.0:obs_weak_source_expired
 libobs.so.0:obs_weak_source_get_source
 libobs.so.0:obs_weak_source_references_source
 libobs.so.0:obs_weak_source_release
@@ -1859,6 +1891,11 @@ libobs.so.0:os_set_thread_name
 libobs.so.0:os_sleep_ms
 libobs.so.0:os_sleepto_ns
 libobs.so.0:os_strtod
+libobs.so.0:os_task_queue_create
+libobs.so.0:os_task_queue_destroy
+libobs.so.0:os_task_queue_inside
+libobs.so.0:os_task_queue_queue_task
+libobs.so.0:os_task_queue_wait
 libobs.so.0:os_unlink
 libobs.so.0:os_utf8_to_mbs_ptr
 libobs.so.0:os_utf8_to_wcs
