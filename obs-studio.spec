@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 27.2.4
-Release  : 29
+Release  : 30
 URL      : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Summary  : OBS Studio Library
@@ -144,7 +144,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1648618576
+export SOURCE_DATE_EPOCH=1656397067
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -164,10 +164,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
 export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
@@ -177,7 +177,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1648618576
+export SOURCE_DATE_EPOCH=1656397067
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/obs-studio-27.2.4/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/4cc77b90af91e615a64ae04893fdffa7939db84c
@@ -197,7 +197,7 @@ popd
 pushd clr-build
 %make_install
 popd
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -1384,6 +1384,11 @@ popd
 /usr/lib64/cmake/LibObs/LibObsConfigVersion.cmake
 /usr/lib64/cmake/LibObs/LibObsTarget-relwithdebinfo.cmake
 /usr/lib64/cmake/LibObs/LibObsTarget.cmake
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-frontend-api.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-opengl.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-scripting.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobsglad.so
 /usr/lib64/libobs-frontend-api.so
 /usr/lib64/libobs-opengl.so
 /usr/lib64/libobs-scripting.so
@@ -1397,6 +1402,12 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-frontend-api.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-frontend-api.so.0.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-opengl.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs-opengl.so.0.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobs.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libobsglad.so.0
 /usr/lib64/libobs-frontend-api.so.0
 /usr/lib64/libobs-frontend-api.so.0.0
 /usr/lib64/libobs-opengl.so.0
@@ -1421,7 +1432,6 @@ popd
 /usr/lib64/obs-plugins/vlc-video.so
 /usr/lib64/obs-scripting/_obspython.so
 /usr/lib64/obs-scripting/obslua.so
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
