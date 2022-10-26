@@ -4,7 +4,7 @@
 #
 Name     : obs-studio
 Version  : 27.2.4
-Release  : 36
+Release  : 37
 URL      : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Summary  : OBS Studio Library
@@ -144,7 +144,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656702633
+export SOURCE_DATE_EPOCH=1666810223
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -164,10 +164,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
-export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
-export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
-export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
 export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
@@ -177,20 +177,20 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656702633
+export SOURCE_DATE_EPOCH=1666810223
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
-cp %{_builddir}/obs-studio-27.2.4/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/obs-studio-27.2.4/UI/data/license/gplv2.txt %{buildroot}/usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed
-cp %{_builddir}/obs-studio-27.2.4/UI/data/license/gplv2.txt %{buildroot}/usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed
-cp %{_builddir}/obs-studio-27.2.4/deps/jansson/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/26a708b97cbb50e3fce8078dd21d65c8fdd5a605
-cp %{_builddir}/obs-studio-27.2.4/deps/json11/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c
-cp %{_builddir}/obs-studio-27.2.4/deps/libcaption/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/ac86b1d99268507a73261982375a5f47541247b1
-cp %{_builddir}/obs-studio-27.2.4/deps/w32-pthreads/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/0aeece1a03fbe9860ded71b2e17445209ad33c77
-cp %{_builddir}/obs-studio-27.2.4/deps/w32-pthreads/COPYING.LIB %{buildroot}/usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0
-cp %{_builddir}/obs-studio-27.2.4/plugins/mac-syphon/data/syphon_license.txt %{buildroot}/usr/share/package-licenses/obs-studio/6f68b53b3b12e5b75f296c54be785bc63e553d53
-cp %{_builddir}/obs-studio-27.2.4/plugins/obs-filters/rnnoise/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/5f8e73e1f293d0f127c2bcad2ab6fc5fa2a58139
-cp %{_builddir}/obs-studio-27.2.4/plugins/obs-outputs/librtmp/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/6138ce06f16aef800693fb256090749acbabd038
+cp %{_builddir}/obs-studio-%{version}/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/4cc77b90af91e615a64ae04893fdffa7939db84c || :
+cp %{_builddir}/obs-studio-%{version}/UI/data/license/gplv2.txt %{buildroot}/usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed || :
+cp %{_builddir}/obs-studio-%{version}/UI/data/license/gplv2.txt %{buildroot}/usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed || :
+cp %{_builddir}/obs-studio-%{version}/deps/jansson/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/26a708b97cbb50e3fce8078dd21d65c8fdd5a605 || :
+cp %{_builddir}/obs-studio-%{version}/deps/json11/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c || :
+cp %{_builddir}/obs-studio-%{version}/deps/libcaption/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/ac86b1d99268507a73261982375a5f47541247b1 || :
+cp %{_builddir}/obs-studio-%{version}/deps/w32-pthreads/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/0aeece1a03fbe9860ded71b2e17445209ad33c77 || :
+cp %{_builddir}/obs-studio-%{version}/deps/w32-pthreads/COPYING.LIB %{buildroot}/usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0 || :
+cp %{_builddir}/obs-studio-%{version}/plugins/mac-syphon/data/syphon_license.txt %{buildroot}/usr/share/package-licenses/obs-studio/6f68b53b3b12e5b75f296c54be785bc63e553d53 || :
+cp %{_builddir}/obs-studio-%{version}/plugins/obs-filters/rnnoise/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/5f8e73e1f293d0f127c2bcad2ab6fc5fa2a58139 || :
+cp %{_builddir}/obs-studio-%{version}/plugins/obs-outputs/librtmp/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/6138ce06f16aef800693fb256090749acbabd038 || :
 pushd clr-build-avx2
 %make_install_v3  || :
 popd
