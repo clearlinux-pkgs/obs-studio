@@ -5,7 +5,7 @@
 #
 Name     : obs-studio
 Version  : 27.2.4
-Release  : 42
+Release  : 43
 URL      : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Summary  : OBS Studio Library
@@ -129,15 +129,15 @@ license components for the obs-studio package.
 %prep
 %setup -q -n obs-studio-27.2.4
 cd %{_builddir}/obs-studio-27.2.4
-%patch1 -p1
-%patch2 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683064721
+export SOURCE_DATE_EPOCH=1687468844
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -170,7 +170,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1683064721
+export SOURCE_DATE_EPOCH=1687468844
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/obs-studio-%{version}/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -1270,11 +1270,7 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libobs-frontend-api.so
-/V3/usr/lib64/libobs-opengl.so
 /V3/usr/lib64/libobs-scripting.so
-/V3/usr/lib64/libobs.so
-/V3/usr/lib64/libobsglad.so
 /usr/include/obs/audio-monitoring/pulse/pulseaudio-wrapper.h
 /usr/include/obs/callback/calldata.h
 /usr/include/obs/callback/decl.h
@@ -1392,9 +1388,7 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libobs-frontend-api.so.0
 /V3/usr/lib64/libobs-frontend-api.so.0.0
-/V3/usr/lib64/libobs-opengl.so.0
 /V3/usr/lib64/libobs-opengl.so.0.0
 /V3/usr/lib64/libobs.so.0
 /V3/usr/lib64/libobsglad.so.0
