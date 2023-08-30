@@ -16,3 +16,5 @@ libftl
 ajantv2
 libsrt
 librist
+mbedcrypto
+mbedx509
