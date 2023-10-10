@@ -5,7 +5,7 @@
 #
 Name     : obs-studio
 Version  : 29.1.3
-Release  : 49
+Release  : 50
 URL      : https://github.com/obsproject/obs-studio/archive/29.1.3/obs-studio-29.1.3.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/29.1.3/obs-studio-29.1.3.tar.gz
 Summary  : OBS Studio Library
