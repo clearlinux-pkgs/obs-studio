@@ -7,7 +7,7 @@
 #
 Name     : obs-studio
 Version  : 27.2.4
-Release  : 54
+Release  : 55
 URL      : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/27.2.4/obs-studio-27.2.4.tar.gz
 Summary  : OBS Studio Library
