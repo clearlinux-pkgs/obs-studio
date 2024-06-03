@@ -1,20 +1,19 @@
 # This file contains pkgconfig build requirements that get picked up
 # but are undesirable. One entry per line, no whitespace.
-libobs
-obs
-x264
+ajantv2
 curl
+detours
 fdk-aac
 iconv
 jack
-libspeexdsp
-mbedtls
-v4l-utils
-rnnoise
-detours
 libftl
-ajantv2
+libobs
+libspeexdsp
 libsrt
-librist
 mbedcrypto
+mbedtls
 mbedx509
+obs
+rnnoise
+v4l-utils
+x264

@@ -1,7 +1,7 @@
-From adb74662586ae32e41e3b5dbba8c04a0f257ac96 Mon Sep 17 00:00:00 2001
+From eb84ad5656b17436200dc1ee6cb6d12605ac8e0c Mon Sep 17 00:00:00 2001
 From: Auke Kok <auke-jan.h.kok@intel.com>
 Date: Tue, 5 Nov 2019 12:55:38 -0800
-Subject: [PATCH 1/2] build without libx264
+Subject: [PATCH] build without libx264
 
 v2: undo 2 changes in original patch that make changes to UI with no
 effect on behavior
@@ -13,10 +13,10 @@ Signed-off-by: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
  2 files changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/plugins/CMakeLists.txt b/plugins/CMakeLists.txt
-index 537ed21..f24a771 100644
+index 90bea35be273..d602468e06fd 100644
 --- a/plugins/CMakeLists.txt
 +++ b/plugins/CMakeLists.txt
-@@ -70,7 +70,6 @@ if(WIN32 OR APPLE)
+@@ -175,7 +175,6 @@ else()
  endif()
  
  add_subdirectory(image-source)
@@ -25,17 +25,18 @@ index 537ed21..f24a771 100644
  add_subdirectory(obs-ffmpeg)
  add_subdirectory(obs-outputs)
 diff --git a/plugins/obs-x264/CMakeLists.txt b/plugins/obs-x264/CMakeLists.txt
-index 7d4ea8b..5ef4249 100644
+index 196c5ab7ae53..1147cc6bb4a2 100644
 --- a/plugins/obs-x264/CMakeLists.txt
 +++ b/plugins/obs-x264/CMakeLists.txt
-@@ -1,6 +1,6 @@
- project(obs-x264)
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22...3.25)
+ 
+ legacy_check()
  
 -find_package(Libx264 REQUIRED)
 +find_package(Libx264)
- include_directories(${LIBX264_INCLUDE_DIRS})
- add_definitions(${LIBX264_DEFINITIONS})
  
+ if(NOT TARGET OBS::opts-parser)
+   add_subdirectory("${CMAKE_SOURCE_DIR}/deps/opts-parser" "${CMAKE_BINARY_DIR}/deps/opts-parser")
 -- 
-2.23.0
+2.45.1
 

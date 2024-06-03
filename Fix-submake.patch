@@ -1,0 +1,88 @@
+From 36b12d331ca9c7676ceed884009b3a3446ba17c8 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Wed, 29 May 2024 10:53:41 -0700
+Subject: [PATCH] Fix submake
+
+Don't call cmake from cmake
+---
+ cmake/Modules/ObsHelpers.cmake | 36 ----------------------------------
+ 1 file changed, 36 deletions(-)
+
+diff --git a/cmake/Modules/ObsHelpers.cmake b/cmake/Modules/ObsHelpers.cmake
+index b4620ab56daf..73613805462e 100644
+--- a/cmake/Modules/ObsHelpers.cmake
++++ b/cmake/Modules/ObsHelpers.cmake
+@@ -51,14 +51,6 @@ function(setup_binary_target target)
+       COMPONENT IGNORED
+       EXCLUDE_FROM_ALL)
+ 
+-  add_custom_command(
+-    TARGET ${target}
+-    POST_BUILD
+-    COMMAND "${CMAKE_COMMAND}" -E env DESTDIR= "${CMAKE_COMMAND}" --install .. --config $<CONFIG> --prefix
+-            ${OBS_OUTPUT_DIR}/$<CONFIG> --component obs_${target} > "$<IF:$<PLATFORM_ID:Windows>,nul,/dev/null>"
+-    COMMENT "Installing OBS rundir"
+-    VERBATIM)
+-
+ endfunction()
+ 
+ # Helper function to set up OBS plugin targets
+@@ -83,13 +75,6 @@ function(setup_plugin_target target)
+ 
+   setup_target_resources("${target}" "obs-plugins/${target}")
+   set_property(GLOBAL APPEND PROPERTY OBS_MODULE_LIST "${target}")
+-  add_custom_command(
+-    TARGET ${target}
+-    POST_BUILD
+-    COMMAND "${CMAKE_COMMAND}" -E env DESTDIR= "${CMAKE_COMMAND}" --install .. --config $<CONFIG> --prefix
+-            ${OBS_OUTPUT_DIR}/$<CONFIG> --component obs_${target} > "$<IF:$<PLATFORM_ID:Windows>,nul,/dev/null>"
+-    COMMENT "Installing ${target} to OBS rundir"
+-    VERBATIM)
+ 
+   obs_status(ENABLED "${target}")
+ endfunction()
+@@ -121,13 +106,6 @@ function(setup_script_plugin_target target)
+       EXCLUDE_FROM_ALL)
+   endif()
+   set_property(GLOBAL APPEND PROPERTY OBS_SCRIPTING_MODULE_LIST "${target}")
+-  add_custom_command(
+-    TARGET ${target}
+-    POST_BUILD
+-    COMMAND "${CMAKE_COMMAND}" -E env DESTDIR= "${CMAKE_COMMAND}" --install .. --config $<CONFIG> --prefix
+-            ${OBS_OUTPUT_DIR}/$<CONFIG> --component obs_${target} > "$<IF:$<PLATFORM_ID:Windows>,nul,/dev/null>"
+-    COMMENT "Installing ${target} to OBS rundir"
+-    VERBATIM)
+ 
+   obs_status(ENABLED "${target}")
+ endfunction()
+@@ -188,13 +166,6 @@ function(setup_obs_app target)
+     add_dependencies(${target} OBS::ffmpeg-mux)
+   endif()
+ 
+-  add_custom_command(
+-    TARGET ${target}
+-    POST_BUILD
+-    COMMAND "${CMAKE_COMMAND}" -E env DESTDIR= "${CMAKE_COMMAND}" --install .. --config $<CONFIG> --prefix
+-            ${OBS_OUTPUT_DIR}/$<CONFIG> --component obs_rundir > "$<IF:$<PLATFORM_ID:Windows>,nul,/dev/null>"
+-    COMMENT "Installing OBS rundir"
+-    VERBATIM)
+ endfunction()
+ 
+ # Helper function to do additional setup for browser source plugin
+@@ -457,13 +428,6 @@ function(_install_obs_datatarget target destination)
+     endif()
+   endif()
+ 
+-  add_custom_command(
+-    TARGET ${target}
+-    POST_BUILD
+-    COMMAND "${CMAKE_COMMAND}" -E env DESTDIR= "${CMAKE_COMMAND}" --install .. --config $<CONFIG> --prefix
+-            ${OBS_OUTPUT_DIR}/$<CONFIG> --component obs_${target} > "$<IF:$<PLATFORM_ID:Windows>,nul,/dev/null>"
+-    COMMENT "Installing ${target} to OBS rundir"
+-    VERBATIM)
+ endfunction()
+ 
+ # legacy_check: Macro to check for CMake framework version and include legacy list file
+-- 
+2.45.1
+

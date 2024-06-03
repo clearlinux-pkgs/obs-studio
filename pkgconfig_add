@@ -1,5 +1,11 @@
 # This file contains additional pkgconfig build requirements that did
 # not get picked up automatically. One name per line, no whitespace.
+Qt6Svg
+Qt6Widgets
+asio
 curl
-Qt5Widgets
+librist
 luajit
+mbedtls
+srt
+zlib

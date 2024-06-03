@@ -1,8 +1,13 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-v4l-utils-dev
+QR-Code-generator-dev
 curl-dev
+libajantv2-dev
+libdatachannel-dev
+nlohmann_json-dev
 not-ffmpeg-dev
 pipewire-dev
 speex-dev
 speexdsp-dev
+v4l-utils-dev
+websocketpp-dev
