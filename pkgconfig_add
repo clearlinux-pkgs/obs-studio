@@ -4,8 +4,11 @@ Qt6Svg
 Qt6Widgets
 asio
 curl
+fdk-aac
+jack
 librist
 luajit
 mbedtls
+sndio
 srt
 zlib

@@ -3,16 +3,11 @@
 ajantv2
 curl
 detours
-fdk-aac
 iconv
-jack
 libftl
 libobs
 libspeexdsp
 libsrt
-mbedcrypto
-mbedtls
-mbedx509
 obs
 rnnoise
 v4l-utils
