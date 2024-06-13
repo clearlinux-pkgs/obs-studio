@@ -1,0 +1,26 @@
+From 58074aa8eeb54fb4f4ff315fbb7030cd390c13e8 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Thu, 13 Jun 2024 13:43:43 -0700
+Subject: [PATCH] Fix plugin installation path
+
+Paths already include the installation prefix; don't prepend it again.
+---
+ libobs/obs-nix.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libobs/obs-nix.c b/libobs/obs-nix.c
+index b006a5598006..531655eb3b4c 100644
+--- a/libobs/obs-nix.c
++++ b/libobs/obs-nix.c
+@@ -56,7 +56,7 @@ const char *get_module_extension(void)
+ #define FLATPAK_PLUGIN_PATH "/app/plugins"
+ 
+ static const char *module_bin[] = {
+-	OBS_INSTALL_PREFIX "/" OBS_PLUGIN_DESTINATION,
++	OBS_PLUGIN_DESTINATION,
+ 	"../../obs-plugins/" BIT_STRING,
+ 	FLATPAK_PLUGIN_PATH "/" OBS_PLUGIN_DESTINATION,
+ };
+-- 
+2.45.2
+

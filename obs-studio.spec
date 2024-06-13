@@ -7,7 +7,7 @@
 #
 Name     : obs-studio
 Version  : 30.1.2
-Release  : 60
+Release  : 61
 URL      : https://github.com/obsproject/obs-studio/archive/30.1.2/obs-studio-30.1.2.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/30.1.2/obs-studio-30.1.2.tar.gz
 Source1  : https://github.com/microsoft/ftl-sdk/archive/d0c8469f66806b5ea738d607f7d2b000af8b1129.tar.gz
@@ -16,7 +16,7 @@ Source3  : https://github.com/obsproject/obs-browser/archive/b4f724ae6abd371f8f0
 Source4  : https://github.com/obsproject/obs-websocket/archive/5b4aa9dabd26e488c3556ba83a92b9cef7a032c3.tar.gz
 Summary  : OBS Studio Library
 Group    : Development/Tools
-License  : Apache-2.0 BSD-1-Clause BSD-2-Clause BSD-3-Clause GPL-2.0 LGPL-2.1 MIT
+License  : Apache-2.0 BSD-1-Clause BSD-2-Clause BSD-3-Clause BSL-1.0 GPL-2.0 ISC LGPL-2.1 MIT
 Requires: obs-studio-bin = %{version}-%{release}
 Requires: obs-studio-data = %{version}-%{release}
 Requires: obs-studio-lib = %{version}-%{release}
@@ -87,6 +87,7 @@ Patch2: obs-studio-change-default-config-to-ffmpeg.patch
 Patch3: backport-aja-Prepare-plugins-for-new-libajantv2-repo.patch
 Patch4: Fix-submake.patch
 Patch5: backport-Fix-AJANTV2-includes-in-backport-patch.patch
+Patch6: Fix-plugin-installation-path.patch
 
 %description
 PTHREADS-WIN32
@@ -169,13 +170,14 @@ cp -r %{_builddir}/obs-websocket-5b4aa9dabd26e488c3556ba83a92b9cef7a032c3/* %{_b
 %patch -P 3 -p1
 %patch -P 4 -p1
 %patch -P 5 -p1
+%patch -P 6 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1718309834
+export SOURCE_DATE_EPOCH=1718322110
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -198,7 +200,8 @@ export GOAMD64=v2
 -DENABLE_JACK=ON \
 -DENABLE_LIBFDK=ON \
 -DENABLE_SNDIO=ON \
--DOBS_MULTIARCH_SUFFIX=64  -G 'Unix Makefiles'
+-DOBS_MULTIARCH_SUFFIX=64 \
+-DOBS_VERSION_OVERRIDE="%{version}-%{release}"  -G 'Unix Makefiles'
 make  %{?_smp_mflags}
 popd
 mkdir -p clr-build-avx2
@@ -227,7 +230,8 @@ FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 "
 -DENABLE_JACK=ON \
 -DENABLE_LIBFDK=ON \
 -DENABLE_SNDIO=ON \
--DOBS_MULTIARCH_SUFFIX=64  -G 'Unix Makefiles'
+-DOBS_MULTIARCH_SUFFIX=64 \
+-DOBS_VERSION_OVERRIDE="%{version}-%{release}"  -G 'Unix Makefiles'
 make  %{?_smp_mflags}
 popd
 
@@ -246,7 +250,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1718309834
+export SOURCE_DATE_EPOCH=1718322110
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/ftl-sdk-d0c8469f66806b5ea738d607f7d2b000af8b1129/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/ee78578e91b465f4bf4c5728a22c564e55ad59f6 || :
@@ -258,15 +262,18 @@ cp %{_builddir}/obs-studio-%{version}/UI/data/license/gplv2.txt %{buildroot}/usr
 cp %{_builddir}/obs-studio-%{version}/deps/blake2/LICENSE.blake2 %{buildroot}/usr/share/package-licenses/obs-studio/148d1cf7220659006b5d5e03263b7c40ad6a9a3a || :
 cp %{_builddir}/obs-studio-%{version}/deps/json11/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c || :
 cp %{_builddir}/obs-studio-%{version}/deps/libcaption/LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/ac86b1d99268507a73261982375a5f47541247b1 || :
+cp %{_builddir}/obs-studio-%{version}/deps/media-playback/LICENSE.media-playback %{buildroot}/usr/share/package-licenses/obs-studio/b301afd1148e3c3631e9352ef19eb9c667707eb9 || :
 cp %{_builddir}/obs-studio-%{version}/deps/uthash/uthash/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/bb6a5c5c266d376fb74be28218fe8b073c4913f7 || :
 cp %{_builddir}/obs-studio-%{version}/deps/w32-pthreads/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/0aeece1a03fbe9860ded71b2e17445209ad33c77 || :
 cp %{_builddir}/obs-studio-%{version}/deps/w32-pthreads/COPYING.LIB %{buildroot}/usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0 || :
 cp %{_builddir}/obs-studio-%{version}/libobs/graphics/libnsgif/LICENSE.libnsgif %{buildroot}/usr/share/package-licenses/obs-studio/2e4be4b425e6099d28a6822a0b04740a922a0587 || :
 cp %{_builddir}/obs-studio-%{version}/libobs/util/simde/LICENSE.simde %{buildroot}/usr/share/package-licenses/obs-studio/1528e23fe952214a0939024727ed9ad218d742c4 || :
+cp %{_builddir}/obs-studio-%{version}/plugins/decklink/LICENSE.decklink-sdk %{buildroot}/usr/share/package-licenses/obs-studio/4b42d99a3282f3d7071bdcc1f742a0d05c7ea7c0 || :
 cp %{_builddir}/obs-studio-%{version}/plugins/mac-syphon/data/syphon_license.txt %{buildroot}/usr/share/package-licenses/obs-studio/6f68b53b3b12e5b75f296c54be785bc63e553d53 || :
 cp %{_builddir}/obs-studio-%{version}/plugins/obs-filters/rnnoise/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/5f8e73e1f293d0f127c2bcad2ab6fc5fa2a58139 || :
 cp %{_builddir}/obs-studio-%{version}/plugins/obs-outputs/librtmp/COPYING %{buildroot}/usr/share/package-licenses/obs-studio/6138ce06f16aef800693fb256090749acbabd038 || :
 cp %{_builddir}/obs-studio-%{version}/plugins/obs-qsv11/obs-qsv11-LICENSE.txt %{buildroot}/usr/share/package-licenses/obs-studio/5cd1064384e731cce71df85f2c74bfb6f2756644 || :
+cp %{_builddir}/obs-websocket-5b4aa9dabd26e488c3556ba83a92b9cef7a032c3/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/e34353da7128500175862c3eef1c3ff89f83eecd || :
 export GOAMD64=v2
 GOAMD64=v3
 pushd clr-build-avx2
@@ -2152,10 +2159,10 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libobs-frontend-api.so.0
-/V3/usr/lib64/libobs-opengl.so.0
-/V3/usr/lib64/libobs-scripting.so.0
-/V3/usr/lib64/libobs.so.0
+/V3/usr/lib64/libobs-frontend-api.so.30
+/V3/usr/lib64/libobs-opengl.so.30
+/V3/usr/lib64/libobs-scripting.so.30
+/V3/usr/lib64/libobs.so.30
 /V3/usr/lib64/obs-plugins/aja-output-ui.so
 /V3/usr/lib64/obs-plugins/aja.so
 /V3/usr/lib64/obs-plugins/decklink-captions.so
@@ -2184,11 +2191,13 @@ popd
 /V3/usr/lib64/obs-scripting/_obspython.so
 /V3/usr/lib64/obs-scripting/obslua.so
 /usr/lib64/libobs-frontend-api.so.0
-/usr/lib64/libobs-opengl.so.0
+/usr/lib64/libobs-frontend-api.so.30
 /usr/lib64/libobs-opengl.so.1
-/usr/lib64/libobs-scripting.so.0
+/usr/lib64/libobs-opengl.so.30
 /usr/lib64/libobs-scripting.so.1
+/usr/lib64/libobs-scripting.so.30
 /usr/lib64/libobs.so.0
+/usr/lib64/libobs.so.30
 /usr/lib64/obs-plugins/aja-output-ui.so
 /usr/lib64/obs-plugins/aja.so
 /usr/lib64/obs-plugins/decklink-captions.so
@@ -2224,6 +2233,7 @@ popd
 /usr/share/package-licenses/obs-studio/148d1cf7220659006b5d5e03263b7c40ad6a9a3a
 /usr/share/package-licenses/obs-studio/1528e23fe952214a0939024727ed9ad218d742c4
 /usr/share/package-licenses/obs-studio/2e4be4b425e6099d28a6822a0b04740a922a0587
+/usr/share/package-licenses/obs-studio/4b42d99a3282f3d7071bdcc1f742a0d05c7ea7c0
 /usr/share/package-licenses/obs-studio/4cc77b90af91e615a64ae04893fdffa7939db84c
 /usr/share/package-licenses/obs-studio/53ae571e8630014de689edff14f755f16e5db8ed
 /usr/share/package-licenses/obs-studio/5cd1064384e731cce71df85f2c74bfb6f2756644
@@ -2231,8 +2241,10 @@ popd
 /usr/share/package-licenses/obs-studio/6138ce06f16aef800693fb256090749acbabd038
 /usr/share/package-licenses/obs-studio/6f68b53b3b12e5b75f296c54be785bc63e553d53
 /usr/share/package-licenses/obs-studio/ac86b1d99268507a73261982375a5f47541247b1
+/usr/share/package-licenses/obs-studio/b301afd1148e3c3631e9352ef19eb9c667707eb9
 /usr/share/package-licenses/obs-studio/bb6a5c5c266d376fb74be28218fe8b073c4913f7
 /usr/share/package-licenses/obs-studio/d40d61b8fa8ecae46da12bd1fce4162af02cff8c
 /usr/share/package-licenses/obs-studio/dfac199a7539a404407098a2541b9482279f690d
+/usr/share/package-licenses/obs-studio/e34353da7128500175862c3eef1c3ff89f83eecd
 /usr/share/package-licenses/obs-studio/ee78578e91b465f4bf4c5728a22c564e55ad59f6
 /usr/share/package-licenses/obs-studio/f6c7aa5a4f602a093c50a1d3328d1cb873ffdfc0
