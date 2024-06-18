@@ -1,4 +1,3 @@
-build-without-libx264.patch
 obs-studio-change-default-config-to-ffmpeg.patch
 backport-aja-Prepare-plugins-for-new-libajantv2-repo.patch
 Fix-submake.patch

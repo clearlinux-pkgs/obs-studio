@@ -11,4 +11,5 @@ luajit
 mbedtls
 sndio
 srt
+x264
 zlib
