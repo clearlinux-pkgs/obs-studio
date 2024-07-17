@@ -1,5 +1,4 @@
-obs-studio-change-default-config-to-ffmpeg.patch
-backport-aja-Prepare-plugins-for-new-libajantv2-repo.patch
-Fix-submake.patch
-backport-Fix-AJANTV2-includes-in-backport-patch.patch
-Fix-plugin-installation-path.patch
+0001-Fix-plugin-installation-path.patch
+0002-obs-studio-change-default-config-to-ffmpeg.patch
+0003-Fix-submake.patch
+0004-Fix-AJANTV2-includes-in-backport-patch.patch

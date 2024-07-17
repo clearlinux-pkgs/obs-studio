@@ -9,5 +9,6 @@ not-ffmpeg-dev
 pipewire-dev
 speex-dev
 speexdsp-dev
+uthash-dev
 v4l-utils-dev
 websocketpp-dev

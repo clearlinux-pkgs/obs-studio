@@ -1,7 +1,7 @@
-From 813895a25bec5c9193ffc096f15f40d271af04d2 Mon Sep 17 00:00:00 2001
+From f8d8bc2631860e021d6c98fc62b523c82f7fdcc3 Mon Sep 17 00:00:00 2001
 From: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
 Date: Tue, 12 Nov 2019 11:11:43 -0800
-Subject: [PATCH] obs-studio: change default config to ffmpeg
+Subject: [PATCH 2/4] obs-studio: change default config to ffmpeg
 
 Change default config to ffmpeg advanced with webm as default format.
 
@@ -11,10 +11,10 @@ Signed-off-by: Chelsea Mafrica <chelsea.e.mafrica@intel.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/UI/window-basic-main.cpp b/UI/window-basic-main.cpp
-index 5cd8f8de254f..9a1d09f89421 100644
+index 20e2d01..74881ac 100644
 --- a/UI/window-basic-main.cpp
 +++ b/UI/window-basic-main.cpp
-@@ -1619,7 +1619,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+@@ -1701,7 +1701,7 @@ bool OBSBasic::InitBasicConfigDefaults()
  
  	/* ----------------------------------------------------- */
  
@@ -23,7 +23,7 @@ index 5cd8f8de254f..9a1d09f89421 100644
  
  	config_set_default_bool(basicConfig, "Stream1", "IgnoreRecommended",
  				false);
-@@ -1657,7 +1657,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+@@ -1746,7 +1746,7 @@ bool OBSBasic::InitBasicConfigDefaults()
  	config_set_default_uint(basicConfig, "AdvOut", "VodTrackIndex", 2);
  	config_set_default_string(basicConfig, "AdvOut", "Encoder", "obs_x264");
  
@@ -32,7 +32,7 @@ index 5cd8f8de254f..9a1d09f89421 100644
  
  	config_set_default_string(basicConfig, "AdvOut", "RecFilePath",
  				  GetDefaultVideoSavePath().c_str());
-@@ -1672,7 +1672,7 @@ bool OBSBasic::InitBasicConfigDefaults()
+@@ -1761,7 +1761,7 @@ bool OBSBasic::InitBasicConfigDefaults()
  	config_set_default_bool(basicConfig, "AdvOut", "FFOutputToFile", true);
  	config_set_default_string(basicConfig, "AdvOut", "FFFilePath",
  				  GetDefaultVideoSavePath().c_str());

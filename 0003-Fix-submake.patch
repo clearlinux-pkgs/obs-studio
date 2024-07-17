@@ -1,7 +1,7 @@
-From 36b12d331ca9c7676ceed884009b3a3446ba17c8 Mon Sep 17 00:00:00 2001
+From b9ff5be70d69ab73a02b91010a2a5992d85fae4f Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Wed, 29 May 2024 10:53:41 -0700
-Subject: [PATCH] Fix submake
+Subject: [PATCH 3/4] Fix submake
 
 Don't call cmake from cmake
 ---
@@ -9,7 +9,7 @@ Don't call cmake from cmake
  1 file changed, 36 deletions(-)
 
 diff --git a/cmake/Modules/ObsHelpers.cmake b/cmake/Modules/ObsHelpers.cmake
-index b4620ab56daf..73613805462e 100644
+index b4620ab..7361380 100644
 --- a/cmake/Modules/ObsHelpers.cmake
 +++ b/cmake/Modules/ObsHelpers.cmake
 @@ -51,14 +51,6 @@ function(setup_binary_target target)

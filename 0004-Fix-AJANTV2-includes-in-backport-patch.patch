@@ -1,14 +1,14 @@
-From 55b5d238efc97c0839188f45cd9d960394cbfa14 Mon Sep 17 00:00:00 2001
+From 4eb086c5e7469d86d28c0d6bd3c66ef0a26dd7a1 Mon Sep 17 00:00:00 2001
 From: "Brett T. Warden" <brett.t.warden@intel.com>
 Date: Mon, 3 Jun 2024 15:04:42 -0700
-Subject: [PATCH] Fix AJANTV2 includes in backport patch
+Subject: [PATCH 4/4] Fix AJANTV2 includes in backport patch
 
 ---
  cmake/Modules/FindLibAJANTV2.cmake | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/cmake/Modules/FindLibAJANTV2.cmake b/cmake/Modules/FindLibAJANTV2.cmake
-index 2ae1801ffdd5..50c24d364e15 100644
+index 2ae1801..50c24d3 100644
 --- a/cmake/Modules/FindLibAJANTV2.cmake
 +++ b/cmake/Modules/FindLibAJANTV2.cmake
 @@ -136,11 +136,11 @@ if(LIBAJANTV2_FOUND)
