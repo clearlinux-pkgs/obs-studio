@@ -7,7 +7,7 @@
 #
 Name     : obs-studio
 Version  : 30.2.0
-Release  : 67
+Release  : 68
 URL      : https://github.com/obsproject/obs-studio/archive/30.2.0/obs-studio-30.2.0.tar.gz
 Source0  : https://github.com/obsproject/obs-studio/archive/30.2.0/obs-studio-30.2.0.tar.gz
 Source1  : https://github.com/microsoft/ftl-sdk/archive/d0c8469f66806b5ea738d607f7d2b000af8b1129.tar.gz
