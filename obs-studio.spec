@@ -6,10 +6,10 @@
 # autospec commit: eaa4f711da30
 #
 Name     : obs-studio
-Version  : 30.2.0
-Release  : 69
-URL      : https://github.com/obsproject/obs-studio/archive/30.2.0/obs-studio-30.2.0.tar.gz
-Source0  : https://github.com/obsproject/obs-studio/archive/30.2.0/obs-studio-30.2.0.tar.gz
+Version  : 30.2.3
+Release  : 70
+URL      : https://github.com/obsproject/obs-studio/archive/30.2.3/obs-studio-30.2.3.tar.gz
+Source0  : https://github.com/obsproject/obs-studio/archive/30.2.3/obs-studio-30.2.3.tar.gz
 Source1  : https://github.com/microsoft/ftl-sdk/archive/d0c8469f66806b5ea738d607f7d2b000af8b1129.tar.gz
 Source2  : https://github.com/obsproject/libdshowcapture/archive/ef8c1d2e19c93e664100dd41e1a0df4f8ad45430.tar.gz
 Source3  : https://github.com/obsproject/obs-browser/archive/b4f724ae6abd371f8f0378f29c908f51065190f3.tar.gz
@@ -148,7 +148,7 @@ license components for the obs-studio package.
 
 
 %prep
-%setup -q -n obs-studio-30.2.0
+%setup -q -n obs-studio-30.2.3
 cd %{_builddir}
 tar xf %{_sourcedir}/ef8c1d2e19c93e664100dd41e1a0df4f8ad45430.tar.gz
 cd %{_builddir}
@@ -157,21 +157,21 @@ cd %{_builddir}
 tar xf %{_sourcedir}/d0c8469f66806b5ea738d607f7d2b000af8b1129.tar.gz
 cd %{_builddir}
 tar xf %{_sourcedir}/5b4aa9dabd26e488c3556ba83a92b9cef7a032c3.tar.gz
-cd %{_builddir}/obs-studio-30.2.0
+cd %{_builddir}/obs-studio-30.2.3
 mkdir -p plugins/win-dshow/libdshowcapture
-cp -r %{_builddir}/libdshowcapture-ef8c1d2e19c93e664100dd41e1a0df4f8ad45430/* %{_builddir}/obs-studio-30.2.0/plugins/win-dshow/libdshowcapture
+cp -r %{_builddir}/libdshowcapture-ef8c1d2e19c93e664100dd41e1a0df4f8ad45430/* %{_builddir}/obs-studio-30.2.3/plugins/win-dshow/libdshowcapture
 mkdir -p plugins/obs-browser
-cp -r %{_builddir}/obs-browser-b4f724ae6abd371f8f0378f29c908f51065190f3/* %{_builddir}/obs-studio-30.2.0/plugins/obs-browser
+cp -r %{_builddir}/obs-browser-b4f724ae6abd371f8f0378f29c908f51065190f3/* %{_builddir}/obs-studio-30.2.3/plugins/obs-browser
 mkdir -p plugins/obs-outputs/ftl-sdk
-cp -r %{_builddir}/ftl-sdk-d0c8469f66806b5ea738d607f7d2b000af8b1129/* %{_builddir}/obs-studio-30.2.0/plugins/obs-outputs/ftl-sdk
+cp -r %{_builddir}/ftl-sdk-d0c8469f66806b5ea738d607f7d2b000af8b1129/* %{_builddir}/obs-studio-30.2.3/plugins/obs-outputs/ftl-sdk
 mkdir -p plugins/obs-websocket
-cp -r %{_builddir}/obs-websocket-5b4aa9dabd26e488c3556ba83a92b9cef7a032c3/* %{_builddir}/obs-studio-30.2.0/plugins/obs-websocket
+cp -r %{_builddir}/obs-websocket-5b4aa9dabd26e488c3556ba83a92b9cef7a032c3/* %{_builddir}/obs-studio-30.2.3/plugins/obs-websocket
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 %patch -P 4 -p1
 pushd ..
-cp -a obs-studio-30.2.0 buildavx2
+cp -a obs-studio-30.2.3 buildavx2
 popd
 
 %build
@@ -179,7 +179,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1725565232
+export SOURCE_DATE_EPOCH=1725569104
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -252,7 +252,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1725565232
+export SOURCE_DATE_EPOCH=1725569104
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/obs-studio
 cp %{_builddir}/ftl-sdk-d0c8469f66806b5ea738d607f7d2b000af8b1129/LICENSE %{buildroot}/usr/share/package-licenses/obs-studio/ee78578e91b465f4bf4c5728a22c564e55ad59f6 || :
