@@ -5,6 +5,7 @@ Qt6Widgets
 asio
 curl
 fdk-aac
+ffnvcodec
 jack
 librist
 luajit

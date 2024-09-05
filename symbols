@@ -54,6 +54,7 @@ libobs-frontend-api.so.0:obs_frontend_preview_program_mode_active
 libobs-frontend-api.so.0:obs_frontend_preview_program_trigger_transition
 libobs-frontend-api.so.0:obs_frontend_push_ui_translation
 libobs-frontend-api.so.0:obs_frontend_recording_active
+libobs-frontend-api.so.0:obs_frontend_recording_add_chapter
 libobs-frontend-api.so.0:obs_frontend_recording_pause
 libobs-frontend-api.so.0:obs_frontend_recording_paused
 libobs-frontend-api.so.0:obs_frontend_recording_split_file
@@ -335,8 +336,10 @@ libobs.so.0:_mpeg_bitstream_cea708_sort_flush
 libobs.so.0:_utf8_newline
 libobs.so.0:add_alignment
 libobs.so.0:add_default_module_paths
+libobs.so.0:add_ready_encoder_group
 libobs.so.0:array_output_serializer_free
 libobs.so.0:array_output_serializer_init
+libobs.so.0:array_output_serializer_reset
 libobs.so.0:astrcmp_n
 libobs.so.0:astrcmpi
 libobs.so.0:astrcmpi_n
@@ -394,6 +397,9 @@ libobs.so.0:bounds_transform
 libobs.so.0:bounds_transform3x4
 libobs.so.0:bounds_under_plane
 libobs.so.0:brealloc
+libobs.so.0:buffered_file_serializer_free
+libobs.so.0:buffered_file_serializer_init
+libobs.so.0:buffered_file_serializer_init_defaults
 libobs.so.0:calc_crc32
 libobs.so.0:calc_torque
 libobs.so.0:calc_torquef
@@ -866,6 +872,7 @@ libobs.so.0:matrix4_transpose
 libobs.so.0:media_remux_job_create
 libobs.so.0:media_remux_job_destroy
 libobs.so.0:media_remux_job_process
+libobs.so.0:metadata_obu_itu_t35
 libobs.so.0:module_has_qt5_check
 libobs.so.0:mpeg_bitstream_flush
 libobs.so.0:mpeg_bitstream_init
@@ -949,6 +956,8 @@ libobs.so.0:obs_data_get_frames_per_second
 libobs.so.0:obs_data_get_int
 libobs.so.0:obs_data_get_json
 libobs.so.0:obs_data_get_json_pretty
+libobs.so.0:obs_data_get_json_pretty_with_defaults
+libobs.so.0:obs_data_get_json_with_defaults
 libobs.so.0:obs_data_get_last_json
 libobs.so.0:obs_data_get_obj
 libobs.so.0:obs_data_get_quat
@@ -1102,11 +1111,15 @@ libobs.so.0:obs_encoder_get_type_data
 libobs.so.0:obs_encoder_get_weak_encoder
 libobs.so.0:obs_encoder_get_width
 libobs.so.0:obs_encoder_gpu_scaling_enabled
+libobs.so.0:obs_encoder_group_actually_destroy
+libobs.so.0:obs_encoder_group_create
+libobs.so.0:obs_encoder_group_destroy
 libobs.so.0:obs_encoder_has_roi
 libobs.so.0:obs_encoder_initialize
 libobs.so.0:obs_encoder_packet_create_instance
 libobs.so.0:obs_encoder_packet_ref
 libobs.so.0:obs_encoder_packet_release
+libobs.so.0:obs_encoder_parent_video
 libobs.so.0:obs_encoder_paused
 libobs.so.0:obs_encoder_properties
 libobs.so.0:obs_encoder_release
@@ -1115,6 +1128,7 @@ libobs.so.0:obs_encoder_scaling_enabled
 libobs.so.0:obs_encoder_set_audio
 libobs.so.0:obs_encoder_set_frame_rate_divisor
 libobs.so.0:obs_encoder_set_gpu_scale_type
+libobs.so.0:obs_encoder_set_group
 libobs.so.0:obs_encoder_set_last_error
 libobs.so.0:obs_encoder_set_name
 libobs.so.0:obs_encoder_set_preferred_video_format
@@ -1152,6 +1166,7 @@ libobs.so.0:obs_extract_hevc_headers
 libobs.so.0:obs_fader_add_callback
 libobs.so.0:obs_fader_attach_source
 libobs.so.0:obs_fader_create
+libobs.so.0:obs_fader_db_to_def
 libobs.so.0:obs_fader_destroy
 libobs.so.0:obs_fader_detach_source
 libobs.so.0:obs_fader_get_db
@@ -2009,7 +2024,15 @@ libobs.so.0:os_mbs_to_wcs_ptr
 libobs.so.0:os_mkdir
 libobs.so.0:os_mkdirs
 libobs.so.0:os_opendir
+libobs.so.0:os_process_args_add_arg
+libobs.so.0:os_process_args_add_argf
+libobs.so.0:os_process_args_create
+libobs.so.0:os_process_args_destroy
+libobs.so.0:os_process_args_get_argc
+libobs.so.0:os_process_args_get_argv
 libobs.so.0:os_process_pipe_create
+libobs.so.0:os_process_pipe_create2
+libobs.so.0:os_process_pipe_create_internal
 libobs.so.0:os_process_pipe_destroy
 libobs.so.0:os_process_pipe_read
 libobs.so.0:os_process_pipe_read_err
@@ -2222,6 +2245,8 @@ libobs.so.0:video_format_from_fourcc
 libobs.so.0:video_format_get_parameters
 libobs.so.0:video_format_get_parameters_for_format
 libobs.so.0:video_frame_copy
+libobs.so.0:video_frame_get_linesizes
+libobs.so.0:video_frame_get_plane_heights
 libobs.so.0:video_frame_init
 libobs.so.0:video_output_active
 libobs.so.0:video_output_close
