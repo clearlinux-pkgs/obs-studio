@@ -8,6 +8,7 @@ libftl
 libobs
 libspeexdsp
 libsrt
+libvlc
 obs
 rnnoise
 v4l-utils
